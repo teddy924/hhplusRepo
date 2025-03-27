@@ -191,7 +191,7 @@ public class PointService {
 
         // 락을 사용자별로 관리
         Lock lock = userLocks.computeIfAbsent(id, k -> new ReentrantLock()); // 사용자별 락
-        lock.lock();  // 락을 획득하여 다른 요청들이 대기하도록 처리
+        lock.lock();                                                               // 락을 획득하여 다른 요청들이 대기하도록 처리
 
         try {
             // 현재 요청 수 가져오기
