@@ -152,4 +152,33 @@ class PointServiceIntegrationTest {
 
     }
 
+    @DisplayName("포인트 사용 - 동시성 테스트")
+    @Test
+    void test_UsePoint_Concurrency_CompletableFuture() throws Exception {
+        // given
+        long userId = 4L;
+        long initPoint = 100_000L;
+        long useAmount = 10_000L;
+        int threadCount = 5;
+
+        userPointTable.insertOrUpdate(userId, initPoint);
+
+        // when
+        List<CompletableFuture<UserPoint>> futures = IntStream.range(0, threadCount)
+                .mapToObj(i -> CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return pointService.usePoint(userId, useAmount);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }))
+                .toList();
+
+        // 모든 비동기 작업 완료 대기
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+
+        // then
+        UserPoint finalPoint = pointService.retvPoint(userId);
+        Assertions.assertThat(finalPoint.point()).isEqualTo(initPoint - (useAmount * threadCount));
+    }
 }
