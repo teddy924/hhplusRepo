@@ -37,7 +37,7 @@ class PointServiceUnitTest {
 
         //when - then
         Assertions.assertThatThrownBy(() -> { pointService.retvPoint(userId);})
-                .isInstanceOf(Exception.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("0이 될 수 없습니다.");
 
     }
@@ -50,7 +50,7 @@ class PointServiceUnitTest {
 
         //when - then
         Assertions.assertThatThrownBy(() -> { pointService.retvPoint(userId);})
-                .isInstanceOf(Exception.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("음수가 될 수 없습니다.");
 
     }
@@ -117,7 +117,7 @@ class PointServiceUnitTest {
 
         //when - then
         Assertions.assertThatThrownBy(() -> { pointService.chargePoint(userId, amount);})
-                .isInstanceOf(Exception.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("0이 될 수 없습니다.");
     }
 
@@ -130,7 +130,7 @@ class PointServiceUnitTest {
 
         //when - then
         Assertions.assertThatThrownBy(() -> { pointService.chargePoint(userId, amount);})
-                .isInstanceOf(Exception.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("음수가 될 수 없습니다.");
     }
 
@@ -161,7 +161,7 @@ class PointServiceUnitTest {
 
         //when - then
         Assertions.assertThatThrownBy(() -> { pointService.chargePoint(id, amount);})
-                .isInstanceOf(Exception.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("1회 최대 충전");
 
     }
@@ -196,7 +196,7 @@ class PointServiceUnitTest {
 
         //when - then
         Assertions.assertThatThrownBy(() -> { pointService.chargePoint(id, amount);})
-                .isInstanceOf(Exception.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("보유 가능한 최대 포인트");
 
     }
@@ -241,7 +241,7 @@ class PointServiceUnitTest {
 
         //when - then
         Assertions.assertThatThrownBy(() -> { pointService.usePoint(userId, amount);})
-                .isInstanceOf(Exception.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("음수가 될 수 없습니다.");
     }
 
@@ -272,7 +272,7 @@ class PointServiceUnitTest {
 
         //when - then
         Assertions.assertThatThrownBy(() -> { pointService.usePoint(id, amount);})
-                .isInstanceOf(Exception.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("1회 최대 사용");
 
     }
@@ -306,7 +306,7 @@ class PointServiceUnitTest {
 
         //when - then
         Assertions.assertThatThrownBy(() -> { pointService.usePoint(id, amount);})
-                .isInstanceOf(Exception.class)
+                .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("보유 포인트보다 많은 포인트");
 
     }
